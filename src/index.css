@@ -1,0 +1,8 @@
+@import "tailwindcss";
+.text-shadow {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.text-login-shadow {
+  text-shadow: 10px 10px 10px rgb(20, 14, 10);
+}
