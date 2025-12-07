@@ -79,7 +79,7 @@ function Login() {
                   <a href="">don't have an account?</a>
                   <br></br>
                   <button className="bg-black mx-auto  text-white  box-shadow shadow-2xl hover:bg-orange-500 hover:text-black transition ease-in-out duration-300   p-2 rounded">
-                    Register
+                    <Link to="/register">Register</Link>
                   </button>
                 </div>
               </div>

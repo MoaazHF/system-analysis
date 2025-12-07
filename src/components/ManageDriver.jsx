@@ -17,16 +17,16 @@ function ManageDriver() {
   // console.log(driver);
 
   return (
-    <div className="w-[99vw] min-h-screen bg-cover  bg-[url(src/components/uploads/Manage-Driver-background.png)]">
+    <div className="w-[99vw] h-[100vw]  bg-cover  bg-[url(src/components/uploads/Manage-Driver-background.png)]">
       <div className="absolute w-full">
         <h1 className=" mt-30 bg-orange-500 font-extrabold border-4 border-black w-full text-white text-center text-3xl">
           Set Drivers
         </h1>
-        <div className=" grid grid-cols-3 gap-8 p-10 min-h-[40vw]">
+        <div className=" grid grid-cols-3 gap-8 p-10 h-[10vw]">
           {orders.map((order, index) => (
             <div
               key={index}
-              className="backdrop-brightness-100 text-black backdrop-blur-3xl border-white/50 shadow-2xl rounded px-10 border-2 p-4 h-1/2 mt-20"
+              className="backdrop-brightness-100 text-black backdrop-blur-3xl border-white/50 shadow-2xl rounded px-10 border-2 p-4  mt-20 h-[20vw]"
             >
               <h1>
                 <strong>Order:{index + 1}</strong>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function PlacedOrder() {
   //useState() عبارة عن array العنصر الاول  بيكون الداتا الحالية و العنصر الثاني بيكون فانكشن هتعملها على العنصر الاول عشان تحدثه
@@ -147,7 +148,7 @@ function PlacedOrder() {
               className="hover:brightness-150 cursor-pointer border-2 rounded-full p-3 bg-orange-600 text-white border-black"
               type="submit"
             >
-              Submit
+              <Link to="/vieworder">Submit</Link>
             </button>
             <input value={"pending"} name="progress" className="hidden"></input>
             <input value={""} name="driver" className="hidden"></input>

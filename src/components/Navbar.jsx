@@ -11,13 +11,13 @@ function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <div className=" fixed mt-2 top-0 w-full z-100 lg:w-[50vw] p-1 backdrop-brightness-75  lg:translate-x-1/2 backdrop-blur-3xl  border-white/50 shadow-2xl  rounded-full px-10 ">
+      <div className=" fixed mt-2 top-0 w-full z-100 lg:w-[50vw] p-1 backdrop-brightness-50  lg:translate-x-1/2 backdrop-blur-3xl  border-white/50 shadow-2xl  rounded-full px-10 ">
         <nav className=" hidden lg:block  p-1 rounded-full ">
           <ul className="flex justify-center space-x-8  text-white font-semibold cursor-pointer items-center">
             <li className="hover:text-orange-500">
               <Link to="/">
                 <img
-                  className="w-10 h-10 backdrop-blur-3xl"
+                  className="w-15 h-10 backdrop-blur-3xl"
                   src="src/components/uploads/Logo.png"
                   alt="Logo"
                 ></img>
@@ -32,8 +32,8 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link className="hover:text-orange-500" to="/main">
-                Main
+              <Link className="hover:text-orange-500" to="/track">
+                Track Orders
               </Link>
             </li>
             <li>
@@ -44,6 +44,11 @@ function Navbar() {
             <li>
               <Link className="hover:text-orange-500" to="/contact">
                 Contact
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:text-orange-500" to="/doc">
+                Doc
               </Link>
             </li>
           </ul>
