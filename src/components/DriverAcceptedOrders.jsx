@@ -1,85 +1,106 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import {
+  BsTruck,
+  BsCheckCircleFill,
+  BsXCircleFill,
+  BsArrowLeftCircle,
+} from "react-icons/bs";
 
 function DriverAcceptedOrders() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-      <div className="w-[99vw] min-h-screen">
-        <h1 className="text-3xl bg-amber-500 text-center mt-40">
-          {" "}
+      <div className="w-[99vw] min-h-screen bg-gray-100 py-10">
+        {/* Header */}
+        <h1 className="text-4xl text-center mt-10 font-extrabold bg-amber-500 text-white py-4 shadow-lg flex justify-center gap-3 items-center">
+          <BsTruck className="text-4xl" />
           Delivery Status Dashboard
         </h1>
-        <div className="w-fit mx-90 mt-20">
-          <table className="border-2 text-center items-center justify-center">
-            <thead className="border-2">
+
+        {/* Table Container */}
+        <div className="overflow-x-auto mt-16 px-8">
+          <table className="w-full text-center border border-gray-300 shadow-xl bg-white rounded-xl overflow-hidden">
+            <thead className="bg-gray-200 text-lg font-semibold">
               <tr>
-                <th className="outline  px-5">Order No</th>
-                <th className="outline  px-5">location</th>
-                <th className="outline px-5">Destination</th>
-                <th className="outline px-5">Distance</th>
-                <th className="outline px-5">Customer Number</th>
-                <th className="outline px-5">Package Weight</th>
-                <th className="outline px-5">Status</th>
+                <th className="p-3 border">Order No</th>
+                <th className="p-3 border">Location</th>
+                <th className="p-3 border">Destination</th>
+                <th className="p-3 border">Distance</th>
+                <th className="p-3 border">Customer Number</th>
+                <th className="p-3 border">Package Weight</th>
+                <th className="p-3 border">Status</th>
               </tr>
             </thead>
-            <tbody className="outline px-5">
-              <tr className="outline px-5">
-                <th className="outline px-5">1</th>
-                <td className="outline px-5">Giza</td>
-                <td className="outline px-5">Helwan</td>
-                <td className="outline px-5">25 KM</td>
-                <td className="outline px-5">01200063681</td>
-                <td className="outline px-5">900 gm</td>
-                <td className="outline px-5">
-                  <div className="flex justify-center">
-                    <button className="p-1 m-1 bg-red-600 text-white rounded-xl hover:scale-105 hover:bg-red-300">
-                      Failed
-                    </button>
-                    <button className="p-1 m-1 bg-green-600 text-white rounded-xl hover:scale-105 hover:bg-green-300">
-                      Delivered
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className="outline px-5">
-                <th className="outline px-5">2</th>
-                <td className="outline px-5">Qena</td>
-                <td className="outline px-5">Sharm EL- Sheikh</td>
-                <td className="outline px-5">725 KM</td>
-                <td className="outline px-5">0111003248</td>
-                <td className="outline px-5">10 KG</td>
-                <div className="flex justify-center">
-                  <button className="p-1 m-1 bg-red-600 text-white rounded-xl hover:scale-105 hover:bg-red-300">
-                    Failed
-                  </button>
-                  <button className="p-1 m-1 bg-green-600 text-white rounded-xl hover:scale-105 hover:bg-green-300">
-                    Delivered
-                  </button>
-                </div>
-              </tr>
-              <tr className="outline px-5">
-                <th className="outline px-5">3</th>
-                <td className="outline px-5">Alexandria</td>
-                <td className="outline px-5">Cairo</td>
-                <td className="outline px-5">430 KM</td>
-                <td className="outline px-5">0114928889</td>
-                <td className="outline px-5">2 KG</td>
-                <div className="flex justify-center">
-                  <button className="p-1 m-1 bg-red-600 text-white rounded-xl hover:scale-105 hover:bg-red-300">
-                    Failed
-                  </button>
-                  <button className="p-1 m-1 bg-green-600 text-white rounded-xl hover:scale-105 hover:bg-green-300">
-                    Delivered
-                  </button>
-                </div>
-              </tr>
+
+            <tbody>
+              {[
+                {
+                  no: 1,
+                  loc: "Giza",
+                  des: "Helwan",
+                  dist: "25 KM",
+                  phone: "01200063681",
+                  weight: "900 gm",
+                },
+                {
+                  no: 2,
+                  loc: "Qena",
+                  des: "Sharm EL-Sheikh",
+                  dist: "725 KM",
+                  phone: "0111003248",
+                  weight: "10 KG",
+                },
+                {
+                  no: 3,
+                  loc: "Alexandria",
+                  des: "Cairo",
+                  dist: "430 KM",
+                  phone: "0114928889",
+                  weight: "2 KG",
+                },
+              ].map((row) => (
+                <tr key={row.no} className="border text-lg">
+                  <td className="p-4 border">{row.no}</td>
+                  <td className="p-4 border">{row.loc}</td>
+                  <td className="p-4 border">{row.des}</td>
+                  <td className="p-4 border">{row.dist}</td>
+                  <td className="p-4 border">{row.phone}</td>
+                  <td className="p-4 border">{row.weight}</td>
+
+                  <td className="p-4 border">
+                    <div className="flex justify-center gap-3">
+                      {/* Failed Button */}
+                      <button className="flex items-center gap-2 p-2 bg-red-600 text-white rounded-xl hover:bg-red-400 hover:scale-105 transition">
+                        <BsXCircleFill className="text-xl" />
+                        Failed
+                      </button>
+
+                      {/* Delivered Button */}
+                      <button className="flex items-center gap-2 p-2 bg-green-600 text-white rounded-xl hover:bg-green-400 hover:scale-105 transition">
+                        <BsCheckCircleFill className="text-xl" />
+                        Delivered
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </div>{" "}
-        <div>
-          <button className="bg-black hover:bg-gray-600 hover:scale-105 text-white rounded-full p-2 translate-x-280 m-10">
-            <Link to="/driver">Back</Link>
-          </button>
+        </div>
+
+        {/* Back Button */}
+        <div className="flex justify-center mt-12">
+          <Link
+            to="/driver"
+            className="flex items-center gap-2 py-3 px-6 bg-black text-white text-xl rounded-2xl shadow-lg hover:bg-gray-700 hover:scale-105 transition"
+          >
+            <BsArrowLeftCircle className="text-2xl" />
+            Back
+          </Link>
         </div>
       </div>
     </>

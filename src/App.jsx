@@ -16,6 +16,7 @@ import ViewOrder from "./components/ViewOrder";
 import Register from "./components/Register";
 import About from "./components/About";
 import Documentation from "./components/Documentation";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/doc" element={<Documentation></Documentation>}></Route>
+        <Route path="/contact" element={<Contact></Contact>}></Route>
       </Routes>
 
       <Footer></Footer>

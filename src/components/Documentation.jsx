@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 function Documentation() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Slides (Same images: DO NOT CHANGE)
   const slides = [
     { src: "src/components/uploads/Diagrams/1.png" },
     { src: "src/components/uploads/Diagrams/2.png" },
@@ -13,133 +19,210 @@ function Documentation() {
     { src: "src/components/uploads/Diagrams/8.png" },
     { src: "src/components/uploads/Diagrams/9.png" },
   ];
+
   const dataflowSlides = [
     { src: "src/components/uploads/Diagrams/DataFlow.jpeg" },
     { src: "src/components/uploads/Diagrams/DataFlow1.jpeg" },
   ];
+
+  const saadSlides = [
+    { src: "src/components/uploads/Diagrams/SAAD/image1.png" },
+    { src: "src/components/uploads/Diagrams/SAAD/image2.png" },
+    { src: "src/components/uploads/Diagrams/SAAD/image3.png" },
+    { src: "src/components/uploads/Diagrams/SAAD/image4.png" },
+    { src: "src/components/uploads/Diagrams/SAAD/image5.png" },
+  ];
+
+  // States
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dataflowCurrentIndex, setDataflowCurrentIndex] = useState(0);
+  const [saadSlidesCurrent, setSaadSlidesCurrent] = useState(0);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  // Functions
+  const nextSlide = () =>
+    setCurrentIndex(currentIndex === slides.length - 1 ? 0 : currentIndex + 1);
 
-  const nextSlide = () => {
-    const isLastIndex = currentIndex === slides.length - 1;
-    const newIndex = isLastIndex ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+  const prevSlide = () =>
+    setCurrentIndex(currentIndex === 0 ? slides.length - 1 : currentIndex - 1);
 
-  const dataflowPrev = () => {
-    const isFirstSlide = dataflowCurrentIndex === 0;
-    const newIndex = isFirstSlide
-      ? dataflowSlides.length - 1
-      : dataflowCurrentIndex - 1;
-    console.log(newIndex);
-    setDataflowCurrentIndex(newIndex);
-  };
-  const dataflowNext = () => {
-    const isLastIndex = dataflowCurrentIndex === dataflowSlides.length - 1;
-    const newIndex = isLastIndex ? 0 : dataflowCurrentIndex + 1;
-    console.log(newIndex);
+  const dataflowNext = () =>
+    setDataflowCurrentIndex(
+      dataflowCurrentIndex === dataflowSlides.length - 1
+        ? 0
+        : dataflowCurrentIndex + 1
+    );
 
-    setDataflowCurrentIndex(newIndex);
-  };
+  const dataflowPrev = () =>
+    setDataflowCurrentIndex(
+      dataflowCurrentIndex === 0
+        ? dataflowSlides.length - 1
+        : dataflowCurrentIndex - 1
+    );
+
+  const nextSaadSlides = () =>
+    setSaadSlidesCurrent(
+      saadSlidesCurrent === saadSlides.length - 1 ? 0 : saadSlidesCurrent + 1
+    );
+
+  const prevSaadSlides = () =>
+    setSaadSlidesCurrent(
+      saadSlidesCurrent === 0 ? saadSlides.length - 1 : saadSlidesCurrent - 1
+    );
+
   return (
-    <>
-      <div className="min-h-screen">
-        <div className="mt-20">
-          <div className="grid gap-10 grid-cols-1">
-            <div className=" justify-center">
-              <div className="">
-                {" "}
-                <h1 className="text-5xl text-extrabold font- italic text-center text-black bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600">
-                  Mostafa Mahmoud Mattar
-                </h1>
-                <h2 className="text-2xl text-center text-orange-600">
-                  Use Case Diagram
-                </h2>
-                <img
-                  src="src/components/uploads/Diagrams/UseCase.jpeg"
-                  className=" w-screen items-center justify-center"
-                ></img>
-              </div>
-            </div>
+    <div className="min-h-screen p-6 space-y-20">
+      {/* Section Template Component */}
+      {/** This removes repetitive code & keeps everything clean **/}
+      {[
+        {
+          title: "Mostafa Mahmoud Mattar",
+          subtitle: "Use Case Diagram",
+          img: "src/components/uploads/Diagrams/UseCase.jpeg",
+        },
+        {
+          title: "Hazem Ahmad Abdullah",
+          subtitle: "Class Diagram",
+          img: "src/components/uploads/Diagrams/ActivityDiagram.png",
+        },
+      ].map((section, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4"
+        >
+          <h1 className="text-4xl mt-15 font-extrabold bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600 bg-clip-text text-transparent">
+            {section.title}
+          </h1>
+          <h2 className="text-2xl text-orange-600">{section.subtitle}</h2>
 
-            <div className="flex">
-              <div className="w-full">
-                {" "}
-                <h1 className="text-5xl text-extrabold font- italic text-center text-black bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600">
-                  Marwan Ibrahim Ali
-                </h1>
-                <h2 className="text-2xl text-center text-orange-600">
-                  Sequence Diagram
-                </h2>
-                <div className="group">
-                  <div
-                    style={{
-                      backgroundImage: `url(${slides[currentIndex].src})`,
-                    }}
-                    className="w-[98vw] m-1 bg-no-repeat  h-[60vw] mt-30  duration-300"
-                  >
-                    {" "}
-                    <div className="hidden group-hover:block hover:brightness-150 hover:scale-105 transition ease-in-out  translate-y-100 translate-x-10 absolute border-2 bg-orange-600 rounded-2xl  cursor-pointer">
-                      <BsChevronLeft size={40} onClick={prevSlide} />
-                    </div>
-                    <div className="hidden group-hover:block hover:brightness-150 hover:scale-105 transition ease-in-out  translate-y-100 border-2 bg-orange-600 rounded-2xl translate-x-350 absolute  cursor-pointer">
-                      <BsChevronRight size={40} onClick={nextSlide} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex">
-              <div className=" w-full">
-                {" "}
-                <h1 className="text-5xl text-extrabold font- italic text-center text-black bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600">
-                  Hazem Ahmad Abdullah
-                </h1>
-                <h2 className="text-2xl text-center text-orange-600">
-                  Activity Diagram
-                </h2>
-                <img
-                  src="src/components/uploads/Diagrams/ActivityDiagram.png"
-                  className="w-[80vw] mx-auto"
-                ></img>
-              </div>
-            </div>
+          <img
+            src={section.img}
+            className="w-[90vw] max-w-[1200px] mx-auto rounded-xl shadow-lg"
+          />
+        </motion.div>
+      ))}
 
-            <div className="w-full">
-              <div className=" justify-center ">
-                {" "}
-                <h1 className="text-5xl text-extrabold font- italic text-center text-black bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600">
-                  Youssef Hany Ibrahim
-                </h1>
-                <h2 className="text-2xl text-center text-orange-600">
-                  Dataflow Diagram
-                </h2>
-                <div className="group ">
-                  <div
-                    style={{
-                      backgroundImage: `url(${dataflowSlides[dataflowCurrentIndex].src})`,
-                    }}
-                    className="w-[80vw] mx-auto  bg-no-repeat  h-[40vw] mt-30 duration-300 "
-                  ></div>
-                  <div className="hidden group-hover:block  hover:brightness-150 hover:scale-105 transition ease-in-out  -translate-y-100 translate-x-10 absolute border-2 bg-orange-600 rounded-2xl  cursor-pointer">
-                    <BsChevronLeft size={40} onClick={dataflowPrev} />
-                  </div>
-                  <div className="hidden hover:brightness-150 hover:scale-105 transition ease-in-out group-hover:block -translate-y-100 border-2 bg-orange-600 rounded-2xl translate-x-350 absolute  cursor-pointer">
-                    <BsChevronRight size={40} onClick={dataflowNext} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* ---------- Saad Slider (Activity Diagram) ---------- */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600 bg-clip-text text-transparent">
+          Hossam Mohy
+        </h1>
+        <h2 className="text-2xl text-orange-600">Activity Diagram</h2>
+
+        <div className="relative w-full max-w-[900px] mx-auto">
+          <motion.div
+            key={saadSlidesCurrent}
+            initial={{ opacity: 0.3, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              backgroundImage: `url(${saadSlides[saadSlidesCurrent].src})`,
+            }}
+            className="w-full h-[60vw] max-h-[600px] bg-no-repeat bg-contain bg-center"
+          />
+
+          {/* Left Button */}
+          <button
+            onClick={prevSaadSlides}
+            className="absolute top-1/2 left-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronLeft size={35} />
+          </button>
+
+          {/* Right Button */}
+          <button
+            onClick={nextSaadSlides}
+            className="absolute top-1/2 right-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronRight size={35} />
+          </button>
         </div>
-      </div>
-    </>
+      </motion.div>
+
+      {/* ---------- Dataflow Slider ---------- */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600 bg-clip-text text-transparent">
+          Youssef Hany Ibrahim
+        </h1>
+        <h2 className="text-2xl text-orange-600">Dataflow Diagram</h2>
+
+        <div className="relative w-full max-w-[900px] mx-auto">
+          <motion.div
+            key={dataflowCurrentIndex}
+            initial={{ opacity: 0.3, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              backgroundImage: `url(${dataflowSlides[dataflowCurrentIndex].src})`,
+            }}
+            className="w-full h-[60vw] max-h-[600px] bg-no-repeat bg-contain bg-center"
+          />
+
+          <button
+            onClick={dataflowPrev}
+            className="absolute top-1/2 left-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronLeft size={35} />
+          </button>
+
+          <button
+            onClick={dataflowNext}
+            className="absolute top-1/2 right-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronRight size={35} />
+          </button>
+        </div>
+      </motion.div>
+
+      {/* ---------- Sequence Diagram Slider ---------- */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-4"
+      >
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600 bg-clip-text text-transparent">
+          Marwan Ibrahim Ali
+        </h1>
+        <h2 className="text-2xl text-orange-600">Sequence Diagram</h2>
+
+        <div className="relative w-full max-w-[1200px] mx-auto">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0.3, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              backgroundImage: `url(${slides[currentIndex].src})`,
+            }}
+            className="w-full h-[60vw] max-h-[600px] bg-no-repeat bg-contain bg-center"
+          />
+
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronLeft size={35} />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-0 bg-orange-600 text-white p-2 rounded-full hover:scale-110 transition"
+          >
+            <BsChevronRight size={35} />
+          </button>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 

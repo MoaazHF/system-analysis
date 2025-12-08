@@ -1,8 +1,12 @@
-import React from "react";
-import { Fade, Slide, Zoom } from "react-awesome-reveal";
+import React, { useEffect } from "react";
+import { Fade, Slide, Zoom, Bounce } from "react-awesome-reveal";
 import { BsFacebook, BsInstagram, BsTwitterX, BsX } from "react-icons/bs";
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth", duration: 10 });
+  }, []);
+
   return (
     <div className="bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section - Full screen with overlay */}
@@ -45,7 +49,7 @@ function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/*Scrooll ICon */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-3 bg-white/70 rounded-full"></div>
@@ -54,12 +58,14 @@ function Home() {
       </div>
 
       {/* Why Section - Improved spacing */}
+
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-center text-orange-500 text-5xl font-extrabold mb-16">
-            Why وصلها?
-          </h2>
-
+          <Fade>
+            <h2 className="text-center text-orange-500 text-5xl font-extrabold mb-16">
+              Why وصلها?
+            </h2>
+          </Fade>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Card 1 */}
             <Slide direction="up">
@@ -118,30 +124,32 @@ function Home() {
         </div>
       </section>
 
-      {/* 24/7 Banner */}
-      <section className="py-20 bg-gradient-to-r from-orange-200 via-orange-500 to-red-500">
-        <div className="max-w-6xl mx-auto text-center px-4">
-          <h2 className="text-white font-extrabold text-4xl md:text-5xl drop-shadow-lg">
-            The city sleeps, but we{" "}
-            <span className="text-yellow-300">don't...</span>
-            <br />
-            <span className="text-6xl mt-4 inline-block">Open 24/7</span>
-          </h2>
-        </div>
-      </section>
-
+      {/*Open 24/7 */}
+      <Fade>
+        <section className="py-20 bg-gradient-to-r from-orange-200 via-orange-500 to-red-500">
+          <div className="max-w-6xl mx-auto text-center px-4">
+            <h2 className="text-white font-extrabold text-4xl md:text-5xl drop-shadow-lg">
+              The city sleeps, but we{" "}
+              <span className="text-yellow-300">don't...</span>
+              <br />
+              <span className="text-6xl mt-4 inline-block">Open 24/7</span>
+            </h2>
+          </div>
+        </section>
+      </Fade>
       {/* How It Works - Timeline Style */}
       <section className="py-24 px-4 bg-gradient-to-b from-orange-50 to-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-orange-500 text-5xl font-extrabold mb-20">
-            How It's Done!
-          </h2>
-
+          <Fade>
+            <h2 className="text-center text-orange-500 text-5xl font-extrabold mb-20">
+              How It's Done!
+            </h2>
+          </Fade>
           <div className="relative">
             {/* Vertical Line */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-orange-200"></div>
 
-            {/* Step 1 - Right */}
+            {/* Step1 */}
             <div className="relative mb-16 md:mb-24">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="md:w-1/2 md:text-right">
@@ -171,7 +179,7 @@ function Home() {
               </div>
             </div>
 
-            {/* Step 2 - Left */}
+            {/* Step 2 */}
             <div className="relative mb-16 md:mb-24">
               <div className="flex flex-col md:flex-row-reverse items-center gap-8">
                 <div className="md:w-1/2 md:text-left">
@@ -304,24 +312,28 @@ function Home() {
 
           <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl p-12 shadow-xl border-2 border-orange-200">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-3xl font-bold text-gray-800 mb-6">
-                  How We Operate
-                </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  An introduction to our project, explaining its functionality
-                  and how it works. We use modern systems and efficient
-                  processes to ensure your packages arrive safely and on time.
-                </p>
-              </div>
+              <Fade>
+                <div>
+                  <h3 className="text-3xl font-bold text-gray-800 mb-6">
+                    How We Operate
+                  </h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    An introduction to our project, explaining its functionality
+                    and how it works. We use modern systems and efficient
+                    processes to ensure your packages arrive safely and on time.
+                  </p>
+                </div>
+              </Fade>
               <div className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl aspect-video flex items-center justify-center">
-                <video
-                  controls
-                  src="src/components/uploads/UML__Use_Case_Diagrams.mp4"
-                  className="text-white text-4xl"
-                >
-                  ▶️
-                </video>
+                <Zoom>
+                  <video
+                    controls
+                    src="src/components/uploads/UML__Use_Case_Diagrams.mp4"
+                    className="text-white text-4xl"
+                  >
+                    ▶️
+                  </video>
+                </Zoom>
               </div>
             </div>
           </div>
@@ -329,6 +341,7 @@ function Home() {
       </section>
 
       {/* Customer Testimonials */}
+
       <section className="py-24 px-4 bg-gradient-to-r from-orange-200 via-orange-400 to-orange-600 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -342,135 +355,146 @@ function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Testimonial 1 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/Marwan.png"
-                  className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">
-                    Marwan Ibrahim
-                  </h4>
-                  <div className="text-orange-400">⭐⭐⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/Marwan.png"
+                    className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">
+                      Marwan Ibrahim
+                    </h4>
+                    <div className="text-orange-400">⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "Egypt's trusted choice for fast delivery, top-tier delivery
+                  at local rates."
+                </p>
+                <div className="mt-4 text-blue-400 text-3xl">
+                  <BsFacebook></BsFacebook>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "Egypt's trusted choice for fast delivery, top-tier delivery at
-                local rates."
-              </p>
-              <div className="mt-4 text-blue-400 text-3xl">
-                <BsFacebook></BsFacebook>
-              </div>
-            </div>
-
+            </Zoom>
             {/* Testimonial 2 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/Mohy_is_sleeping.jpg"
-                  className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">
-                    Hossam Eddin Mohy
-                  </h4>
-                  <div className="text-orange-400">⭐⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/Mohy_is_sleeping.jpg"
+                    className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">
+                      Hossam Eddin Mohy
+                    </h4>
+                    <div className="text-orange-400">⭐⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "Finally, a courier that actually arrives on time! Saved my
+                  business."
+                </p>
+                <div className="mt-4 text-orange-600 text-3xl">
+                  <BsInstagram></BsInstagram>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "Finally, a courier that actually arrives on time! Saved my
-                business."
-              </p>
-              <div className="mt-4 text-orange-600 text-3xl">
-                <BsInstagram></BsInstagram>
-              </div>
-            </div>
-
+            </Zoom>
             {/* Testimonial 3 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/Mosata.jpg"
-                  className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">
-                    Mostafa Matter
-                  </h4>
-                  <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/Mosata.jpg"
+                    className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">
+                      Mostafa Matter
+                    </h4>
+                    <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "Best rates for shipping to Alex. Highly recommended."
+                </p>
+                <div className="mt-4 text-blue-500 text-3xl">
+                  <BsFacebook></BsFacebook>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "Best rates for shipping to Alex. Highly recommended."
-              </p>
-              <div className="mt-4 text-blue-500 text-3xl">
-                <BsFacebook></BsFacebook>
-              </div>
-            </div>
-
+            </Zoom>
             {/* Testimonial 4 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/Hazem.jpg"
-                  className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">Hazem Azab</h4>
-                  <div className="text-orange-400">⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/Hazem.jpg"
+                    className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">Hazem Azab</h4>
+                    <div className="text-orange-400">⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "Premium service, economy prices. Shipping that doesn't break
+                  the bank."
+                </p>
+                <div className="mt-4 text-orange-600 text-3xl">
+                  <BsInstagram></BsInstagram>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "Premium service, economy prices. Shipping that doesn't break
-                the bank."
-              </p>
-              <div className="mt-4 text-orange-600 text-3xl">
-                <BsInstagram></BsInstagram>
-              </div>
-            </div>
-
+            </Zoom>
             {/* Testimonial 5 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/Youssef.jpg"
-                  className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">Youssef Hany</h4>
-                  <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/Youssef.jpg"
+                    className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">
+                      Youssef Hany
+                    </h4>
+                    <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "No hidden fees, just fast service. Save your pounds, not your
+                  performance."
+                </p>
+                <div className="mt-4 text-black text-3xl">
+                  <BsTwitterX></BsTwitterX>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "No hidden fees, just fast service. Save your pounds, not your
-                performance."
-              </p>
-              <div className="mt-4 text-black text-3xl">
-                <BsTwitterX></BsTwitterX>
-              </div>
-            </div>
-
+            </Zoom>
             {/* Testimonial 6 */}
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
-              <div className="flex items-center mb-6">
-                <img
-                  src="src/components/uploads/20250904_130532-2.jpg"
-                  className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                ></img>
-                <div className="ml-4">
-                  <h4 className="font-bold text-white text-lg">Moaaz Hassan</h4>
-                  <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+            <Zoom>
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl hover:bg-white/15 transition-all">
+                <div className="flex items-center mb-6">
+                  <img
+                    src="src/components/uploads/20250904_130532-2.jpg"
+                    className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+                  ></img>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-white text-lg">
+                      Moaaz Hassan
+                    </h4>
+                    <div className="text-orange-400">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+                <p className="text-gray-200 italic">
+                  "The driver was polite and handled my fragile package with
+                  care."
+                </p>
+                <div className="mt-4 text-blue-400 text-3xl">
+                  <BsFacebook></BsFacebook>
                 </div>
               </div>
-              <p className="text-gray-200 italic">
-                "The driver was polite and handled my fragile package with
-                care."
-              </p>
-              <div className="mt-4 text-blue-400 text-3xl">
-                <BsFacebook></BsFacebook>
-              </div>
-            </div>
+            </Zoom>
           </div>
         </div>
       </section>

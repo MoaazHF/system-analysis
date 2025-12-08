@@ -1,161 +1,260 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  BsPerson,
+  BsEnvelope,
+  BsTelephone,
+  BsGeoAlt,
+  BsArrowRightCircle,
+} from "react-icons/bs";
+import { motion } from "framer-motion";
 
 function PlacedOrder() {
-  //useState() عبارة عن array العنصر الاول  بيكون الداتا الحالية و العنصر الثاني بيكون فانكشن هتعملها على العنصر الاول عشان تحدثه
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const [formData, setFormData] = useState({
-    //البيانات دي هي اللي هنجمعها من الفورم
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     location: "",
     destination: "",
-    progress: "",
+    progress: "pending",
     driver: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleForm = (e) => {
     e.preventDefault();
 
-    // 1. Get previous orders (or empty array)
     const arrayOrder = JSON.parse(localStorage.getItem("orders")) || [];
-
-    // 2. Add new order
     arrayOrder.push(formData);
-
-    // 3. Save the updated array
     localStorage.setItem("orders", JSON.stringify(arrayOrder));
-
-    alert("Order Saved!");
-    console.log(arrayOrder);
+    if (formData !== null) {
+      alert("Order Saved!");
+    } else {
+      alert("Please Fill the form!");
+    }
   };
+
+  // --- Focus Animation Variant ---
+  const focusVariant = {
+    focus: {
+      scale: 1.02,
+      boxShadow: "0px 0px 15px rgba(255, 123, 0, 0.45)",
+      transition: { type: "spring", stiffness: 180, damping: 12 },
+    },
+    blur: {
+      scale: 1,
+      boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+      transition: { duration: 0.3 },
+    },
+  };
+
   return (
-    <>
-      {/* Order Now! */}
-      {/* Container */}
-      <h1 className="text-3xl  text-center  text-shadow-[--text-shadow] text-shadow font-extrabold mt-30 text-orange-500">
-        Order Now!
-      </h1>
-      <div className="w-[90vw]   m-10 bg-orange-500 rounded-2xl">
-        <div className=" p-10 mx-100 w-3/4">
-          <form onSubmit={handleForm}>
-            <div className="grid grid-cols-3 mb-4">
-              <div className="">
-                <label class="block text-sm/6 font-medium text-black">
-                  First name
-                </label>
-                <div class="mt-2">
-                  <input
-                    type="text"
-                    name="firstName"
-                    autocomplete="family-name"
-                    onChange={handleChange}
-                    className="block w-1/2 rounded-md bg-white px-3 py-1.5   text-black border-2 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                  />
-                </div>
-              </div>
-              <div className="">
-                <label class="block text-sm/6 font-medium text-black">
-                  Last name
-                </label>
-                <div class="mt-2">
-                  <input
-                    type="text"
-                    name="lastName"
-                    autocomplete="family-name"
-                    onChange={handleChange}
-                    className="block w-1/2 rounded-md bg-white px-3 py-1.5   text-black border-2 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                  />
-                </div>
-              </div>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-orange-300 py-20 px-6">
+      {/* Header */}
+      <motion.h1
+        initial={{ opacity: 0, y: -25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-5xl font-extrabold text-center bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent drop-shadow-xl"
+      >
+        Place Your Delivery Order
+      </motion.h1>
 
-            <div className="">
-              <label class="block text-sm/6 font-medium text-black">
-                Email{" "}
-              </label>
-              <div class="mt-2">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="example@email.com"
-                  autocomplete="family-name"
-                  onChange={handleChange}
-                  className="block w-1/2 rounded-md bg-white px-3 py-1.5   text-black border-2 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                />
-              </div>
-            </div>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.15 }}
+        className="text-center text-gray-700 mt-3 text-lg"
+      >
+        Fast • Secure • Reliable — Enter your details to schedule your delivery
+      </motion.p>
 
-            <div className="">
-              <label class="block text-sm/6 font-medium text-black">
-                Phone Number{" "}
-              </label>
-              <div class="mt-2">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="+20 11xxxxxxxx"
-                  autocomplete="family-name"
-                  onChange={handleChange}
-                  className="block w-1/2 rounded-md bg-white px-3 py-1.5   text-black border-2 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                />
-              </div>
-            </div>
-            <div className="bg-white w-1/2 p-4 rounded-xl my-4 border-2">
-              <label for="Place-select">Location </label>
-
-              <select
-                name="location"
-                className="border-2"
-                onChange={handleChange}
+      {/* Form Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.45 }}
+        className="max-w-3xl mx-auto mt-14 bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/40"
+      >
+        <form onSubmit={handleForm} className="space-y-7">
+          {/* First + Last name */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* First Name */}
+            <div>
+              <label className="text-sm font-semibold">First Name</label>
+              <motion.div
+                variants={focusVariant}
+                whileFocus="focus"
+                whileBlur="blur"
+                className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                           border border-gray-300 shadow-md 
+                           focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                           transition-all duration-300"
               >
-                <option value="">--Please choose an option--</option>
-                <option value="Giza">Giza</option>
-                <option value="Cairo">Cairo</option>
-                <option value="Helwan">Helwan</option>
-                <option value="Alexandria">Alexandria</option>
-                <option value="Qena">Qena</option>
-                <option value="Sharm EL- Sheikh">Sharm EL- Sheikh</option>
-              </select>
+                <BsPerson className="text-orange-600 text-xl" />
+                <input
+                  type="text"
+                  name="firstName"
+                  onChange={handleChange}
+                  required
+                  placeholder="John"
+                  className="w-full bg-transparent outline-none text-gray-700"
+                />
+              </motion.div>
             </div>
-            <div className="bg-white w-1/2 p-4 rounded-xl my-4 border-2">
-              <label for="Place-select">Destination </label>
 
-              <select
-                name="destination"
-                className="border-2"
-                onChange={handleChange}
+            {/* Last Name */}
+            <div>
+              <label className="text-sm font-semibold">Last Name</label>
+              <motion.div
+                variants={focusVariant}
+                whileFocus="focus"
+                whileBlur="blur"
+                className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                           border border-gray-300 shadow-md 
+                           focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                           transition-all duration-300"
               >
-                <option value="">--Please choose an option--</option>
-                <option value="Giza">Giza</option>
-                <option value="Cairo">Cairo</option>
-                <option value="Helwan">Helwan</option>
-                <option value="Alexandria">Alexandria</option>
-                <option value="Qena">Qena</option>
-                <option value="Sharm EL- Sheikh">Sharm EL- Sheikh</option>
-              </select>
+                <BsPerson className="text-orange-600 text-xl" />
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  onChange={handleChange}
+                  placeholder="Doe"
+                  className="w-full bg-transparent outline-none text-gray-700"
+                />
+              </motion.div>
             </div>
+          </div>
 
-            <button
-              className="hover:brightness-150 cursor-pointer border-2 rounded-full p-3 bg-orange-600 text-white border-black"
-              type="submit"
+          {/* Email */}
+          <div>
+            <label className="text-sm font-semibold">Email Address</label>
+            <motion.div
+              variants={focusVariant}
+              whileFocus="focus"
+              whileBlur="blur"
+              className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                         border border-gray-300 shadow-md 
+                         focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                         transition-all duration-300"
             >
-              <Link to="/vieworder">Submit</Link>
-            </button>
-            <input value={"pending"} name="progress" className="hidden"></input>
-            <input value={""} name="driver" className="hidden"></input>
-          </form>
-        </div>
-      </div>
-    </>
+              <BsEnvelope className="text-orange-600 text-xl" />
+              <input
+                type="email"
+                name="email"
+                required
+                onChange={handleChange}
+                placeholder="example@email.com"
+                className="w-full bg-transparent outline-none text-gray-700"
+              />
+            </motion.div>
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="text-sm font-semibold">Phone Number</label>
+            <motion.div
+              variants={focusVariant}
+              whileFocus="focus"
+              whileBlur="blur"
+              className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                         border border-gray-300 shadow-md 
+                         focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                         transition-all duration-300"
+            >
+              <BsTelephone className="text-orange-600 text-xl" />
+              <input
+                type="tel"
+                name="phone"
+                onChange={handleChange}
+                placeholder="+20 11xxxxxxx"
+                className="w-full bg-transparent outline-none text-gray-700"
+              />
+            </motion.div>
+          </div>
+
+          {/* Location */}
+          <div>
+            <label className="text-sm font-semibold">Pickup Location</label>
+            <motion.div
+              variants={focusVariant}
+              whileFocus="focus"
+              whileBlur="blur"
+              className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                         border border-gray-300 shadow-md 
+                         focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                         transition-all duration-300"
+            >
+              <BsGeoAlt className="text-orange-600 text-xl" />
+              <select
+                required
+                name="location"
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none text-gray-700"
+              >
+                <option value="">Choose...</option>
+                <option value="Giza">Giza</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Helwan">Helwan</option>
+                <option value="Alexandria">Alexandria</option>
+                <option value="Qena">Qena</option>
+                <option value="Sharm EL- Sheikh">Sharm EL- Sheikh</option>
+              </select>
+            </motion.div>
+          </div>
+
+          {/* Destination */}
+          <div>
+            <label className="text-sm font-semibold">Destination</label>
+            <motion.div
+              variants={focusVariant}
+              whileFocus="focus"
+              whileBlur="blur"
+              className="group mt-2 flex items-center gap-3 bg-white rounded-xl px-4 py-3 
+                         border border-gray-300 shadow-md 
+                         focus-within:border-orange-600 focus-within:ring-2 focus-within:ring-orange-400 
+                         transition-all duration-300"
+            >
+              <BsGeoAlt className="text-orange-600 text-xl" />
+              <select
+                required
+                name="destination"
+                onChange={handleChange}
+                className="w-full bg-transparent outline-none text-gray-700"
+              >
+                <option value="">Choose...</option>
+                <option value="Giza">Giza</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Helwan">Helwan</option>
+                <option value="Alexandria">Alexandria</option>
+                <option value="Qena">Qena</option>
+                <option value="Sharm EL- Sheikh">Sharm EL- Sheikh</option>
+              </select>
+            </motion.div>
+          </div>
+
+          {/* Submit */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9 }}
+            type="submit"
+            className="mt-6 flex items-center gap-3 mx-auto px-8 py-3 bg-orange-600 text-white 
+                       rounded-full shadow-lg hover:bg-orange-700 transition text-xl"
+          >
+            Submit Order <BsArrowRightCircle size={28} />
+          </motion.button>
+        </form>
+      </motion.div>
+    </div>
   );
 }
 
