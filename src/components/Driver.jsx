@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   BsTruck,
   BsXCircleFill,
@@ -8,6 +8,20 @@ import {
 } from "react-icons/bs";
 
 function Driver() {
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    console.log("clicked", e.currentTarget.name);
+
+    e.preventDefault();
+
+    if (e.target.name === "refuse") {
+      alert("The Order Has Been Refused!");
+    } else {
+      alert("The Order Has Been Accepted , Go Track Your Werehouse!");
+      navigate("/acceptedorders");
+    }
+  };
+
   return (
     <>
       <div className="w-[99vw] min-h-screen bg-gray-100 py-10 mt-10">
@@ -95,14 +109,22 @@ function Driver() {
                   <td className="p-4 border">
                     <div className="flex justify-center gap-3">
                       {/* Refuse Button */}
-                      <button className="flex items-center gap-2 p-2 bg-red-600 text-white rounded-xl hover:bg-red-400 hover:scale-105 transition">
+                      <button
+                        className="flex items-center gap-2 p-2 bg-red-600 text-white rounded-xl hover:bg-red-400 hover:scale-105 transition cursor-pointer"
+                        name="refuse"
+                        onClick={handleSubmit}
+                      >
                         <BsXCircleFill className="text-xl" />
                         Refuse
                       </button>
 
                       {/* Accept Button */}
-                      <button className="flex items-center gap-2 p-2 bg-green-600 text-white rounded-xl hover:bg-green-400 hover:scale-105 transition">
-                        <BsCheckCircleFill className="text-xl" />
+                      <button
+                        className="flex items-center gap-2 p-2 bg-green-600 text-white rounded-xl hover:bg-green-400 hover:scale-105 transition  cursor-pointer"
+                        name="accept"
+                        onClick={handleSubmit}
+                      >
+                        <BsCheckCircleFill className="text-xl " />
                         Accept
                       </button>
                     </div>

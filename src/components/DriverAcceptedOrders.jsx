@@ -12,6 +12,15 @@ function DriverAcceptedOrders() {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (e.target.name === "failed") {
+      alert("The order has Failed Plaese Contact the Customer!");
+    } else {
+      alert("The Order Has been Delivered Successfully! Good Job.");
+    }
+  };
+
   return (
     <>
       <div className="w-[99vw] min-h-screen bg-gray-100 py-10">
@@ -74,13 +83,21 @@ function DriverAcceptedOrders() {
                   <td className="p-4 border">
                     <div className="flex justify-center gap-3">
                       {/* Failed Button */}
-                      <button className="flex items-center gap-2 p-2 bg-red-600 text-white rounded-xl hover:bg-red-400 hover:scale-105 transition">
+                      <button
+                        className="flex items-center gap-2 p-2 bg-red-600 text-white rounded-xl hover:bg-red-400 hover:scale-105 transition cursor-pointer"
+                        name="failed"
+                        onClick={handleSubmit}
+                      >
                         <BsXCircleFill className="text-xl" />
                         Failed
                       </button>
 
                       {/* Delivered Button */}
-                      <button className="flex items-center gap-2 p-2 bg-green-600 text-white rounded-xl hover:bg-green-400 hover:scale-105 transition">
+                      <button
+                        className="flex items-center gap-2 p-2 bg-green-600 text-white rounded-xl hover:bg-green-400 hover:scale-105 transition cursor-pointer"
+                        name="delivered"
+                        onClick={handleSubmit}
+                      >
                         <BsCheckCircleFill className="text-xl" />
                         Delivered
                       </button>
