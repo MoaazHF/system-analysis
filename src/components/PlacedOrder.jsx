@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import {
   BsPerson,
   BsEnvelope,
@@ -250,7 +250,8 @@ function PlacedOrder() {
             className="mt-6 flex items-center gap-3 mx-auto px-8 py-3 bg-orange-600 text-white 
                        rounded-full shadow-lg hover:bg-orange-700 transition text-xl"
           >
-            Submit Order <BsArrowRightCircle size={28} />
+            <Link to={"/vieworder"}>Submit Order</Link>
+            <BsArrowRightCircle size={28} />
           </motion.button>
         </form>
       </motion.div>

@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
 import { Fade, Slide, Zoom, Bounce } from "react-awesome-reveal";
-import { BsFacebook, BsInstagram, BsTwitterX, BsX } from "react-icons/bs";
+import { BiSolidTruck } from "react-icons/bi";
+import {
+  BsCarFront,
+  BsFacebook,
+  BsInstagram,
+  BsSignTurnRight,
+  BsTwitterX,
+  BsX,
+} from "react-icons/bs";
 
 function Home() {
   useEffect(() => {
@@ -203,7 +211,9 @@ function Home() {
                 <div className="hidden md:block w-8 h-8 bg-orange-500 rounded-full border-4 border-white shadow-lg z-10"></div>
                 <div className="md:w-1/2 flex justify-end">
                   <Slide>
-                    <div className="text-8xl">🚛</div>
+                    <div className="text-8xl text-blue-500">
+                      <BiSolidTruck size={100} className=""></BiSolidTruck>
+                    </div>
                   </Slide>
                 </div>
               </div>

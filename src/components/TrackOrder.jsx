@@ -89,7 +89,6 @@ function TrackOrder() {
               {/* Receipt Header */}
               <div className="mb-6 pb-6 border-b-2 border-dashed border-white/40">
                 <div className="flex items-center justify-center gap-3 mb-2">
-                  <Bs0CircleFill className="w-8 h-8 text-white" />
                   <h2 className="text-3xl font-bold text-white text-center">
                     Receipt
                   </h2>
